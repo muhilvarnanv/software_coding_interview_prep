@@ -138,3 +138,9 @@ Write down in simple terms:
 - Was the window **fixed size** or **variable**?
 
 That is enough to defend your approach in an interview.
+
+---
+
+## Practice problems
+
+Curated problems with examples, Python solutions, and plain-language explanations: **[Sliding window — practice](../problems/sliding-window/index.md)**.

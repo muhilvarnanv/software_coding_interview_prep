@@ -5,6 +5,7 @@ Personal, free reference for coding interview rounds—patterns, complexity, and
 ## What’s inside
 
 - **MkDocs** + **Material for MkDocs**: write content in `docs/`, navigation is defined in `mkdocs.yml`.
+- **`prompts/`**: reusable prompt templates for AI tools (not published with the site).
 - **GitHub Pages**: CI builds the site on push to `main` and pushes the result to the **`gh-pages`** branch (no “GitHub Actions” Pages source required).
 
 ## Local preview

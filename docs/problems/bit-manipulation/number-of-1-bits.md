@@ -1,0 +1,41 @@
+# Number of 1 bits
+
+**Topic:** [Bit manipulation problems](index.md) · **Pattern:** [Bit manipulation](../../code-patterns/bit-manipulation.md)
+
+## Problem
+
+Given a positive integer `n`, return the number of **set bits** in its binary representation (also known as the **Hamming weight**).
+
+## Examples
+
+**Example 1**
+
+- `n = 11` (binary `1011`) → `3`
+
+**Example 2**
+
+- `n = 128` (binary `10000000`) → `1`
+
+## Approach (beginner friendly)
+
+Repeatedly clear the **lowest set bit** with `n &= n - 1` until `n` becomes `0`. Each iteration removes exactly one `1`, so the loop count is the Hamming weight.
+
+## Solution (Python)
+
+```python
+def hamming_weight(n: int) -> int:
+    count = 0
+    while n:
+        n &= n - 1
+        count += 1
+    return count
+
+
+assert hamming_weight(11) == 3
+assert hamming_weight(128) == 1
+```
+
+## Complexity
+
+- **Time:** `O(k)` where `k` is the number of set bits (at most bit width).
+- **Space:** `O(1)`.

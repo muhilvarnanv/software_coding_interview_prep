@@ -54,15 +54,66 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Concept library:
-      - concept-library/index.md
-      - concept-library/contiguous-segment.md
-      - concept-library/subsequence.md
-      - concept-library/monotonic-progress.md
+  - Problems:
+      - problems/index.md
+      - Sliding window:
+          - problems/sliding-window/index.md
+          - problems/sliding-window/max-sum-subarray-size-k.md
+          - problems/sliding-window/longest-substring-without-repeating.md
+          - problems/sliding-window/minimum-size-subarray-sum.md
+          - problems/sliding-window/longest-repeating-character-replacement.md
+          - problems/sliding-window/find-all-anagrams-in-string.md
+      - Two pointers:
+          - problems/two-pointers/index.md
+          - problems/two-pointers/two-sum-ii-sorted.md
+          - problems/two-pointers/valid-palindrome.md
+          - problems/two-pointers/three-sum.md
+          - problems/two-pointers/container-with-most-water.md
+          - problems/two-pointers/merge-sorted-array.md
+      - Prefix sum:
+          - problems/prefix-sum/index.md
+          - problems/prefix-sum/range-sum-query-immutable.md
+          - problems/prefix-sum/subarray-sum-equals-k.md
+          - problems/prefix-sum/find-pivot-index.md
+          - problems/prefix-sum/subarray-sums-divisible-by-k.md
+          - problems/prefix-sum/product-of-array-except-self.md
+      - Tortoise and hare:
+          - problems/tortoise-hare/index.md
+          - problems/tortoise-hare/linked-list-cycle.md
+          - problems/tortoise-hare/linked-list-cycle-ii.md
+          - problems/tortoise-hare/middle-of-linked-list.md
+          - problems/tortoise-hare/happy-number.md
+          - problems/tortoise-hare/palindrome-linked-list.md
+      - Two-pass:
+          - problems/two-pass/index.md
+          - problems/two-pass/remove-nth-node-from-end.md
+          - problems/two-pass/replace-with-greatest-on-right.md
+          - problems/two-pass/valid-anagram.md
+          - problems/two-pass/sort-array-by-parity.md
+          - problems/two-pass/relative-sort-array.md
+      - Bit manipulation:
+          - problems/bit-manipulation/index.md
+          - problems/bit-manipulation/single-number.md
+          - problems/bit-manipulation/number-of-1-bits.md
+          - problems/bit-manipulation/reverse-bits.md
+          - problems/bit-manipulation/missing-number.md
+          - problems/bit-manipulation/power-of-two.md
+      - Cyclic sort:
+          - problems/cyclic-sort/index.md
+          - problems/cyclic-sort/first-missing-positive.md
+          - problems/cyclic-sort/find-all-numbers-disappeared.md
+          - problems/cyclic-sort/find-the-duplicate-number.md
+          - problems/cyclic-sort/set-mismatch.md
+          - problems/cyclic-sort/missing-number-in-place.md
   - Code patterns:
-      - index.md
+      - code-patterns/index.md
       - code-patterns/sliding-window.md
+      - code-patterns/prefix-sum.md
       - code-patterns/two-pointer.md
+      - code-patterns/tortoise-hare.md
+      - code-patterns/two-pass.md
+      - code-patterns/bit-manipulation.md
+      - code-patterns/cyclic-sort.md
   - Time & space complexity:
       - time-space-complexity/index.md
       - time-space-complexity/big-o.md
@@ -72,6 +123,10 @@ nav:
   - Hash tables:
       - hash-tables/index.md
       - hash-tables/frequency-maps.md
+
+# Still built and reachable by URL / internal links; omitted from the sidebar.
+not_in_nav: |
+  concept-library/**
 
 plugins:
   - search

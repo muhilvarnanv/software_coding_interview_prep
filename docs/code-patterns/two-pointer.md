@@ -12,7 +12,7 @@ If each index only moves forward (or inward) in a predictable way, you usually t
 
 When pointers only move in one direction along the line (never jumping backward for no reason), that steady movement is related to **[monotonic progress](../concept-library/monotonic-progress.md)**. You do not need that phrase to solve problems; it is just a name for “we are not revisiting old ground in a messy way.”
 
-**Related:** **[Sliding window](sliding-window.md)** — two pointers marking **one** **[contiguous](../concept-library/contiguous-segment.md)** window. **[Subsequence](../concept-library/subsequence.md)** problems (for example “is `s` a subsequence of `t`?”) often use **two indices on two strings**—still two pointers, but a different shape than a single sliding window. Other common uses: merges, partitions, same-direction scans.
+**Related:** **[Sliding window](sliding-window.md)** — two pointers marking **one** **[contiguous](../concept-library/contiguous-segment.md)** window. **[Tortoise and hare](tortoise-hare.md)** — same line, **different speeds** (cycle detection, middle node). **[Subsequence](../concept-library/subsequence.md)** problems (for example “is `s` a subsequence of `t`?”) often use **two indices on two strings**—still two pointers, but a different shape than a single sliding window. Other common uses: merges, partitions, same-direction scans.
 
 ---
 
@@ -132,3 +132,9 @@ In your own words, note:
 - **Sorting:** did sorted order (or another invariant) give you that rule?
 
 That is enough to explain your solution clearly in an interview.
+
+---
+
+## Practice problems
+
+Curated problems with examples, Python solutions, and plain-language explanations: **[Two pointers — practice](../problems/two-pointers/index.md)**.

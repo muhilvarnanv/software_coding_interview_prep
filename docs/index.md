@@ -16,6 +16,7 @@ Structured interview prep (courses, coaches, paid platforms) is useful, but you 
 
 | Area | Focus |
 |------|--------|
+| **Problems** | Pattern-grouped prompts with examples and Python solutions ([hub](problems/index.md)) |
 | **Time & space complexity** | Big-O intuition, tradeoffs, when complexity bites in interviews |
 | **Arrays** | Classic array patterns (e.g. two pointers, [sliding window](code-patterns/sliding-window.md)) |
 | **Hash tables** | Frequency maps, complements, deduplication |
