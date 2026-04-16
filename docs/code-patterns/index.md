@@ -4,7 +4,8 @@ Interview coding rounds often reduce to a small set of **patterns** applied to d
 
 ## Patterns
 
-- **[Sliding window](sliding-window.md)** — contiguous segments with two pointers; fixed-size vs variable-size windows.
+- **[Sliding window](sliding-window.md)** — [contiguous segments](../concept-library/contiguous-segment.md) with two pointers; fixed-size vs variable-size windows. Contrast **[subsequence](../concept-library/subsequence.md)** when gaps are allowed.
+- **[Two pointers](two-pointer.md)** — opposite ends vs same-direction scans; pairs, partitions, and merges.
 
 ## Sections
 

@@ -1,128 +1,140 @@
 # Sliding window
 
-A **sliding window** is a contiguous segment of a sequence (array or string) whose **left and right boundaries move** as you scan. Instead of recomputing everything for each segment, you **update in O(1)** what changes when the window shifts: drop what leaves, add what enters.
+## The idea in one sentence
 
-Across the whole input this often yields **O(n)** time instead of **O(n × window size)** or **O(n²)** from rebuilding each window naively.
+You care about a **continuous chunk** of an array or string—no gaps, just **one block** from index `left` to index `right`. You slide that block along the line: add the new element on the right, sometimes remove elements from the left, and **update your answer** (longest valid chunk, shortest valid chunk, max sum in a chunk of size `k`, and so on).
 
-## When to use it
+That chunk is the **window**. The two edges are **two pointers**—same family as [two pointers](two-pointer.md), focused on **one contiguous segment**.
 
-Sliding window fits when:
+**Contiguous** means “unbroken”: neighbors only. See **[contiguous segment](../concept-library/contiguous-segment.md)** if you want a short formal note.
 
-1. **Linear data** — array, string, or ordered stream.
-2. **Contiguous subarray or substring** — the answer is about a **continuous** chunk.
-3. **A goal on the window** — sum ≤ k, exactly k distinct characters, contains all required letters, max length under a constraint, etc.
-4. <span id="monotonic-progress"></span>**[Monotonic progress](../concept-library/monotonic-progress.md)** — as you extend the right edge, you can often **shrink from the left** when the window is invalid or to optimize (for example, shortest valid window).
+---
 
-**Typical shapes**
+## Why not just try every window?
 
-- **Longest** subarray or substring satisfying a condition — expand `right`, shrink `left` while keeping validity (or restore it).
-- **Shortest** subarray that satisfies a condition — expand until valid, then shrink while still valid.
-- **Fixed size** — max or min over every window of length `k`.
+Trying every possible window from scratch can be **slow** (often many windows × recomputing each window). Sliding window means: when the window moves by **one** step, you **adjust** your running total or counts in **constant time** instead of recomputing the whole window.
 
-It is a weaker match when the answer is **not** contiguous, or when the problem depends on **non-local** structure that breaks a single left-to-right scan with two pointers.
+If each index enters and leaves the window only a **bounded** number of times, the whole algorithm is usually **linear**—**O(n)**—with **small extra memory** (a running sum, a few counters, or a small frequency map).
 
-## How it works (two pointers)
+---
 
-Keep **`left`** and **`right`** (or `start` / `end`):
+## When does sliding window help?
 
-1. **Grow** — advance `right`, include the new element, update aggregates (sum, counts, flags).
-2. **Shrink** — while the window is **invalid** (or while tightening for “shortest”), advance `left` and undo that element’s contribution.
-3. **Record** — whenever the window is in a state you care about, update the answer (max length, min length, count, best sum, etc.).
+Check these:
 
-Extra space is usually **O(1)** or **O(alphabet)** — running sum, frequency map, or a deque when you need the min/max **inside** each fixed window in linear time.
+1. **Linear data** — array or string in order.
+2. **The answer is about one unbroken piece** — a subarray or substring, not “pick any elements anywhere” (that is closer to a **[subsequence](../concept-library/subsequence.md)**).
+3. **You can tell when the window is valid or invalid** with a rule you can update as you add/remove one element at a time.
+4. <span id="monotonic-progress"></span>Often, as you grow the window on the **right**, you only need to move the **left** edge forward (never backward) to fix violations or tighten the window. That one-way movement is what **[monotonic progress](../concept-library/monotonic-progress.md)** refers to—you can still solve problems without memorizing the term.
 
-**Mental model:** brute force over all substrings is often **O(n²)** or worse; sliding window visits each boundary a bounded number of times → **O(n)** for many problems.
+**Common storylines**
 
-## Sliding window or not? (five shapes)
+- **Longest** valid window — stretch `right`; when invalid, move `left` until valid again; track the best length.
+- **Shortest** valid window — stretch until valid; then move `left` while still valid to make it shorter; repeat.
+- **Fixed length `k`** — window always has `k` items; slide one step: drop the leftmost, add the new rightmost.
 
-Use these as a quick **pattern sniff test**. The “no” cases are still solvable—just not with the usual grow-or-shrink window template.
+**When it is usually *not* the right tool**
 
-1. **Positive integers only.** Find the **shortest contiguous** subarray whose sum is **at least** `S`.  
-   **Sliding window:** **Yes** — expand `right` until the sum is large enough, then shrink `left` while the sum stays ≥ `S`; with all positives, shrinking always helps you hunt the shortest window.
+- The answer is **not** one contiguous block (for example, **[subsequence](../concept-library/subsequence.md)** problems).
+- The window rule breaks when you have **negatives** in a sum problem—classic “sum exactly `T`” with negatives often needs **prefix sums** and a hash map, not a simple grow/shrink window.
 
-2. **A string of letters.** Find the **longest contiguous** substring that contains **at most** `k` distinct characters.  
-   **Sliding window:** **Yes** — variable window with counts; shrink from the left when distinct characters exceed `k`.
+---
 
-3. **An array of numbers.** Find the **maximum sum** among every contiguous subarray of **exactly** length `k`.  
-   **Sliding window:** **Yes** — fixed-size window: add the new right element, drop the old left element each step.
+## How it works (simple loop picture)
 
-4. **An array that may include negative numbers.** Count how many **contiguous** subarrays have sum **exactly** `T`.  
-   **Sliding window:** **No** (for the classic two-pointer window) — prefix sums jump non-monotonically when negatives exist, so “expand/shrink while sum ≤ target” does not give a clean window rule the way it does for all-positive “at least `S`” problems. Prefer **prefix sum + hash map**.
+Keep **`left`** and **`right`** (sometimes called `start` / `end`):
 
-5. **An array of numbers (in given order).** Find the **length of the longest strictly increasing subsequence**—you may skip elements, but you **cannot reorder**; the result need **not** be one contiguous block.  
-   **Sliding window:** **No** — the answer is not “one window” over the line; it is a subsequence problem (typically **O(n log n)** with patience-sort / binary search style DP, not grow-shrink on a single segment).
+1. **Grow** — move `right` forward, include `a[right]`, update what you track (sum, counts, “have we seen all required letters?”, etc.).
+2. **Shrink** — while the window breaks your rule (or while you are optimizing “shortest”), move `left` forward and undo what `a[left]` contributed.
+3. **Record** — whenever the window is in a state you care about, update your best answer.
+
+**Extra memory:** often a few numbers or a small map (**O(1)** or **O(alphabet)**). For “min or max inside every fixed window of size `k`” in linear total time, people sometimes use a **deque**—a more advanced variant; many problems only need sum or counts.
+
+---
+
+## Quick examples: “Is this sliding window?”
+
+1. **Positive numbers only:** shortest subarray with sum **at least** `S`.  
+   **Yes** — expand until sum ≥ `S`, then shrink from the left while sum stays ≥ `S` to hunt the shortest piece.
+
+2. **String of letters:** longest substring with **at most** `k` distinct characters.  
+   **Yes** — variable window; when you have too many distinct letters, move `left` until you are legal again.
+
+3. **Numbers:** maximum sum among every subarray of **exactly** length `k`.  
+   **Yes** — fixed window: each step subtract the outgoing left element and add the incoming right element.
+
+4. **Numbers may be negative:** count subarrays with sum **exactly** `T`.  
+   **Usually not** the simple two-pointer window—sums do not grow monotonically. Use **prefix sum + hash map**.
+
+5. **Longest increasing [subsequence](../concept-library/subsequence.md)** (skip elements, not necessarily contiguous).  
+   **No** — not a single window on the line; different techniques (often **O(n log n)**).
 
 ---
 
 ## Fixed window vs variable window
 
-Both use two pointers and local updates. The difference is whether length is **fixed** up front or **driven by a rule**.
+### Fixed window (length always `k`)
 
-### Fixed window
+The window always has **exactly `k`** elements. Each step: **add** at the new right, **remove** at the old left. `right - left + 1` stays `k`.
 
-The window always has **exactly `k` elements** (or you need every consecutive block of length `k`).
-
-- **`left` and `right`** move in lockstep: each step **add** at `right`, **remove** at `left`, with `right - left + 1 = k`.
-- **Examples:** max sum of subarrays of length `k`; rolling average; max in each window of size `k` (sometimes a **deque** for min/max in O(n) total).
-- **Space:** often **O(1)**, or **O(k)** for a deque.
+Examples: max sum of length-`k` subarrays; rolling average; max in each `k`-sized window (sometimes a deque).
 
 Think of a **ruler of length `k`** sliding along the array.
 
-### Variable (varying) window
+### Variable window (length changes)
 
-Length is **not** fixed. You **stretch** with `right` until a condition holds or breaks, then **pull** `left` until the window is valid again (or as far as needed for “shortest” or “longest”).
+You **stretch** with `right` until a condition holds or breaks, then **pull** `left` until the window matches what you need (valid again, or as short as possible while still valid).
 
-- **`right`** usually moves every step; **`left`** moves only when needed.
-- **Examples:** longest substring with at most two distinct characters; shortest subarray with sum ≥ `S`; minimum window substring covering all of `t`.
-- **Amortized** time is still **O(n)** for many templates because each index is entered and left the window a bounded number of times.
+Examples: longest substring with at most two distinct letters; shortest subarray with sum ≥ `S`; minimum window substring that covers all characters of `t`.
 
-Think of a **rubber band**: stretch until the rule is satisfied, then shrink from the left until it barely holds (or breaks and you stretch again).
+Think of a **rubber band**: stretch until the rule is satisfied, then shrink from the left as far as the rule allows.
 
 | | Fixed | Variable |
 |---|--------|----------|
-| **Size** | Always `k` | Changes with the rule |
-| **Moves** | `left` and `right` step together | `right` advances; `left` on demand |
-| **Typical answer** | Best over all windows of size `k` | Longest/shortest window satisfying X |
-| **Update** | Drop `a[left]`, add `a[right]` | While invalid (or optimizing), drop from `left` |
+| **Size** | Always `k` | Grows and shrinks |
+| **Typical move** | `left` and `right` step together | `right` moves every outer step; `left` moves when needed |
+| **Typical question** | Best over every `k`-chunk | Longest or shortest window with property X |
 
-**Quick cue:** the statement says **“length k”** or **“every consecutive k”** → fixed. It says **“longest/shortest”** or **“at most/at least”** without fixing length → variable.
+**Simple cue:** problem says **“length k”** or **“every consecutive k”** → fixed. Says **“longest/shortest”** or **“at most/at least”** without fixing length → variable.
 
 ---
 
-## Worked example (variable window)
+## Worked example: variable window
 
-**Problem (idea):** longest substring with **at most two distinct** characters.
+**Idea:** longest substring with **at most two distinct** characters.
 
 **String:** `eceba`
 
-Track counts of characters in the current window; if distinct count > 2, move `left` until distinct count ≤ 2. Track max window length.
+Track how many of each character are in the current window. If distinct count goes above 2, move `left` until you are back to at most 2. Track the best length you have seen.
 
-| Step | `right` | Char | Action | Window (`left`…`right`) | Distinct | Max length |
-|------|---------|------|--------|-------------------------|----------|------------|
-| 1 | 0 | e | start | `e` | 1 | 1 |
-| 2 | 1 | c | valid | `ec` | 2 | 2 |
-| 3 | 2 | e | valid | `ece` | 2 | 3 |
-| 4 | 3 | b | 3 distinct → shrink | shrink from left | | |
-| | | | remove index 0 (`e`) | `ceb` | 3 | |
-| | | | remove index 1 (`c`) | `eb` | 2 | 3 |
-| 5 | 4 | a | 3 distinct → shrink | remove index 2 (`e`) | `ba` | 2 | 3 |
+| Step | `right` | Char | Window (`left`…`right`) | Distinct | Max length |
+|------|---------|------|-------------------------|----------|------------|
+| 1 | 0 | e | `e` | 1 | 1 |
+| 2 | 1 | c | `ec` | 2 | 2 |
+| 3 | 2 | e | `ece` | 2 | 3 |
+| 4 | 3 | b | too many distinct → shrink from left | | |
+| | | | after dropping `e` then `c`: `eb` | 2 | 3 |
+| 5 | 4 | a | shrink again → `ba` | 2 | 3 |
 
-**Result:** length **3** (substring `ece`).
-
-Each index is visited by `left` and `right` a constant number of times → **O(n)** time; **O(1)** or **O(Σ)** space for counts (small alphabet).
+**Answer:** length **3** (for example substring `ece`).
 
 ---
 
-## Fixed-window micro-example
+## Mini example: fixed window
 
 **Max sum of subarrays of length 3** in `[1, 4, 2, 10, 23, 3, 1, 0, 20]`:
 
 - First window: `1 + 4 + 2 = 7`.
 - Slide: subtract `1`, add `10` → `4 + 2 + 10 = 16`.
-- Repeat; each step is one add and one subtract → **O(n)**.
+- Keep sliding; each step is one add and one subtract → **linear** total work.
 
 ---
 
-## What to add next
+## After you solve a problem
 
-After you solve a problem with this template, note the **invariant** (what stays true as `left` and `right` move) and whether your window was **fixed** or **variable**. That vocabulary is easy to defend in an interview.
+Write down in simple terms:
+
+- What had to stay **true** about the window while you moved `left` and `right`?
+- Was the window **fixed size** or **variable**?
+
+That is enough to defend your approach in an interview.

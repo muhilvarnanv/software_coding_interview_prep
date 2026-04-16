@@ -1,11 +1,13 @@
 # Concept library
 
-Short definitions for vocabulary that shows up across patterns and topics. Each page explains the idea once and points to where it is used in these notes.
+This section collects **short explanations** for words and ideas that show up in several pattern pages. Each page defines the idea once in **plain language** and links to where it is used.
 
 ## Concepts
 
-- **[Monotonic progress](monotonic-progress.md)** — single-direction movement of pointers or window edges so each index is touched a bounded number of times.
+- **[Contiguous segment](contiguous-segment.md)** — one **unbroken** chunk of an array or string: consecutive indices, no gaps, no reordering.
+- **[Monotonic progress](monotonic-progress.md)** — pointers or window edges **keep moving forward** (in one direction) so each position is touched only a few times—why many scans are fast.
+- **[Subsequence](subsequence.md)** — pick elements **in order** with **skips** allowed; not the same as one contiguous block.
 
 ## How this section grows
 
-When a word or phrase keeps appearing in pattern notes (invariants, amortization, “two pointers,” etc.), add a **one-screen** concept page here and link the term from the original pages.
+When the same vocabulary keeps appearing (for example “invariant,” “amortized,” “two pointers”), add a **short** page here and link the term from the pattern notes so readers can look it up once.
