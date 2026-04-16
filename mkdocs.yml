@@ -1,0 +1,57 @@
+site_name: Interview Prep Notes
+site_description: Free, self-paced software coding interview preparation — patterns, data structures, and complexity.
+site_url: https://YOUR_USERNAME.github.io/software_coding_interview_prep/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Code patterns:
+      - code-patterns/index.md
+      - Time & space complexity:
+          - code-patterns/time-space-complexity/index.md
+          - code-patterns/time-space-complexity/big-o.md
+      - Arrays:
+          - code-patterns/arrays/index.md
+          - code-patterns/arrays/two-pointers.md
+      - Hash tables:
+          - code-patterns/hash-tables/index.md
+          - code-patterns/hash-tables/frequency-maps.md
+
+plugins:
+  - search
+
+extra:
+  generator: false
