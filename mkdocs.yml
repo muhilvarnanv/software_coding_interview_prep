@@ -56,6 +56,7 @@ nav:
   - Home: index.md
   - Code patterns:
       - code-patterns/index.md
+      - code-patterns/sliding-window.md
       - Time & space complexity:
           - code-patterns/time-space-complexity/index.md
           - code-patterns/time-space-complexity/big-o.md

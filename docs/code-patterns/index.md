@@ -2,6 +2,10 @@
 
 Interview coding rounds often reduce to a small set of **patterns** applied to different stories (arrays, strings, graphs, etc.). This section collects those patterns in one place.
 
+## Patterns
+
+- **[Sliding window](sliding-window.md)** — contiguous segments with two pointers; fixed-size vs variable-size windows.
+
 ## Sections
 
 - **[Time & space complexity](time-space-complexity/index.md)** — reasoning about cost before you code.

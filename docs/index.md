@@ -17,7 +17,7 @@ Structured interview prep (courses, coaches, paid platforms) is useful, but you 
 | Area | Focus |
 |------|--------|
 | **Time & space complexity** | Big-O intuition, tradeoffs, when complexity bites in interviews |
-| **Arrays** | Classic array patterns (e.g. two pointers, sliding window) |
+| **Arrays** | Classic array patterns (e.g. two pointers, [sliding window](code-patterns/sliding-window.md)) |
 | **Hash tables** | Frequency maps, complements, deduplication |
 
 More sections can follow the same pattern: one landing page per topic, then deeper pages as needed.
