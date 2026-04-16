@@ -2,27 +2,42 @@ site_name: Interview Prep Notes
 site_description: Free, self-paced software coding interview preparation — patterns, data structures, and complexity.
 site_url: https://muhilvarnanv.github.io/software_coding_interview_prep/
 
+repo_url: https://github.com/muhilvarnanv/software_coding_interview_prep
+edit_uri: edit/main/docs/
+
 theme:
   name: material
+  language: en
+  logo: material/code-tags
+  font:
+    text: IBM Plex Sans
+    code: JetBrains Mono
   palette:
+    # Default for new visitors: dark “IDE night”
+    - scheme: slate
+      primary: black
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
     - scheme: default
       primary: indigo
-      accent: teal
+      accent: deep purple
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: teal
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.sections
     - navigation.expand
+    - navigation.instant
+    - navigation.tracking
     - search.suggest
+    - search.highlight
     - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
   - pymdownx.highlight:

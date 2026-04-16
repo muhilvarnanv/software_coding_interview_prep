@@ -1,0 +1,10 @@
+{
+  "name": "software-coding-interview-prep",
+  "private": true,
+  "scripts": {
+    "setup": "node scripts/mkdocs-run.mjs --setup-only",
+    "dev": "node scripts/mkdocs-run.mjs serve",
+    "serve": "npm run dev",
+    "build": "node scripts/mkdocs-run.mjs build --strict"
+  }
+}

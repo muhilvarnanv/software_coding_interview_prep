@@ -1,0 +1,19 @@
+/* Dark-first, terminal-ish polish on top of Material */
+
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: hsl(187, 95%, 68%);
+}
+
+[data-md-color-scheme="slate"] .md-typeset code:not(pre > code) {
+  background-color: hsl(220, 16%, 18%);
+  border: 1px solid hsl(220, 12%, 26%);
+}
+
+.md-typeset pre > code {
+  font-size: 0.8rem;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.md-header {
+  backdrop-filter: blur(10px);
+}
