@@ -54,6 +54,9 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Concept library:
+      - concept-library/index.md
+      - concept-library/monotonic-progress.md
   - Code patterns:
       - index.md
       - code-patterns/sliding-window.md

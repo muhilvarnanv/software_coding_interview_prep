@@ -11,7 +11,7 @@ Sliding window fits when:
 1. **Linear data** — array, string, or ordered stream.
 2. **Contiguous subarray or substring** — the answer is about a **continuous** chunk.
 3. **A goal on the window** — sum ≤ k, exactly k distinct characters, contains all required letters, max length under a constraint, etc.
-4. **Monotonic progress** — as you extend the right edge, you can often **shrink from the left** when the window is invalid or to optimize (for example, shortest valid window).
+4. <span id="monotonic-progress"></span>**[Monotonic progress](../concept-library/monotonic-progress.md)** — as you extend the right edge, you can often **shrink from the left** when the window is invalid or to optimize (for example, shortest valid window).
 
 **Typical shapes**
 
@@ -32,6 +32,25 @@ Keep **`left`** and **`right`** (or `start` / `end`):
 Extra space is usually **O(1)** or **O(alphabet)** — running sum, frequency map, or a deque when you need the min/max **inside** each fixed window in linear time.
 
 **Mental model:** brute force over all substrings is often **O(n²)** or worse; sliding window visits each boundary a bounded number of times → **O(n)** for many problems.
+
+## Sliding window or not? (five shapes)
+
+Use these as a quick **pattern sniff test**. The “no” cases are still solvable—just not with the usual grow-or-shrink window template.
+
+1. **Positive integers only.** Find the **shortest contiguous** subarray whose sum is **at least** `S`.  
+   **Sliding window:** **Yes** — expand `right` until the sum is large enough, then shrink `left` while the sum stays ≥ `S`; with all positives, shrinking always helps you hunt the shortest window.
+
+2. **A string of letters.** Find the **longest contiguous** substring that contains **at most** `k` distinct characters.  
+   **Sliding window:** **Yes** — variable window with counts; shrink from the left when distinct characters exceed `k`.
+
+3. **An array of numbers.** Find the **maximum sum** among every contiguous subarray of **exactly** length `k`.  
+   **Sliding window:** **Yes** — fixed-size window: add the new right element, drop the old left element each step.
+
+4. **An array that may include negative numbers.** Count how many **contiguous** subarrays have sum **exactly** `T`.  
+   **Sliding window:** **No** (for the classic two-pointer window) — prefix sums jump non-monotonically when negatives exist, so “expand/shrink while sum ≤ target” does not give a clean window rule the way it does for all-positive “at least `S`” problems. Prefer **prefix sum + hash map**.
+
+5. **An array of numbers (in given order).** Find the **length of the longest strictly increasing subsequence**—you may skip elements, but you **cannot reorder**; the result need **not** be one contiguous block.  
+   **Sliding window:** **No** — the answer is not “one window” over the line; it is a subsequence problem (typically **O(n log n)** with patience-sort / binary search style DP, not grow-shrink on a single segment).
 
 ---
 
