@@ -1,6 +1,6 @@
 site_name: Interview Prep Notes
 site_description: Free, self-paced software coding interview preparation — patterns, data structures, and complexity.
-site_url: https://YOUR_USERNAME.github.io/software_coding_interview_prep/
+site_url: https://muhilvarnanv.github.io/software_coding_interview_prep/
 
 theme:
   name: material

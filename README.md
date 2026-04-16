@@ -21,9 +21,22 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 ## GitHub Pages setup
 
 1. Create a repo (e.g. `software_coding_interview_prep`) and push this project.
-2. In the repo on GitHub: **Settings → Pages → Build and deployment → Source**: choose **GitHub Actions** (not “Deploy from a branch” for this workflow).
-3. Edit `mkdocs.yml` and replace `YOUR_USERNAME` in `site_url` with your GitHub username (and fix the repo name in the path if different).
-4. Push to `main`; the **Deploy MkDocs to GitHub Pages** workflow should run and publish the site.
+2. **Turn on Pages and point it at Actions** (required or deploy will fail with HTTP 404):
+   - Open **Settings → Pages**.
+   - Under **Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+   - Save if GitHub shows a save control; wait until the setting sticks.
+3. Edit `mkdocs.yml` and set **`site_url`** to `https://<your-username>.github.io/<repo-name>/` (trailing slash, repo name must match the URL path).
+4. Push to `main`, or re-run the failed workflow (**Actions → workflow run → Re-run all jobs**).
+
+### “Creating Pages deployment failed” / `HttpError: Not Found` (404)
+
+That almost always means Pages is still using **Deploy from a branch** or Pages has not been enabled yet. Fix it in **Settings → Pages** by choosing **GitHub Actions** as the source, then trigger the workflow again.
+
+On a **free** GitHub account, **GitHub Pages from Actions** is available for **public** repositories. Private repos need a paid feature for Pages.
+
+### After the first successful deploy
+
+Your site URL will be listed on the **Settings → Pages** page and in the workflow summary (the `github-pages` environment link).
 
 ## Adding pages
 
