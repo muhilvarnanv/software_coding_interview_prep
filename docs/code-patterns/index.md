@@ -8,9 +8,9 @@ Interview coding rounds often reduce to a small set of **patterns** applied to d
 
 ## Sections
 
-- **[Time & space complexity](time-space-complexity/index.md)** — reasoning about cost before you code.
-- **[Arrays](arrays/index.md)** — sequential data, indices, and common techniques.
-- **[Hash tables](hash-tables/index.md)** — O(1) expected lookups and counting.
+- **[Time & space complexity](../time-space-complexity/index.md)** — reasoning about cost before you code.
+- **[Arrays](../arrays/index.md)** — sequential data, indices, and common techniques.
+- **[Hash tables](../hash-tables/index.md)** — O(1) expected lookups and counting.
 
 ## How this section grows
 

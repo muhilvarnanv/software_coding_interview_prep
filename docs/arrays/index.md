@@ -11,7 +11,7 @@ Arrays (and array-backed strings) are the default medium for many interview prob
 
 - **[Two pointers](two-pointers.md)** — from both ends or same direction for linear scans.
 
-Related pattern (arrays and strings): **[Sliding window](../sliding-window.md)** — contiguous windows, fixed or variable length.
+Related pattern (arrays and strings): **[Sliding window](../code-patterns/sliding-window.md)** — contiguous windows, fixed or variable length.
 
 ## Coming later (ideas for new pages)
 
