@@ -55,17 +55,17 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Code patterns:
-      - code-patterns/index.md
+      - index.md
       - code-patterns/sliding-window.md
-      - Time & space complexity:
-          - code-patterns/time-space-complexity/index.md
-          - code-patterns/time-space-complexity/big-o.md
-      - Arrays:
-          - code-patterns/arrays/index.md
-          - code-patterns/arrays/two-pointers.md
-      - Hash tables:
-          - code-patterns/hash-tables/index.md
-          - code-patterns/hash-tables/frequency-maps.md
+  - Time & space complexity:
+      - time-space-complexity/index.md
+      - time-space-complexity/big-o.md
+  - Arrays:
+      - arrays/index.md
+      - arrays/two-pointers.md
+  - Hash tables:
+      - hash-tables/index.md
+      - hash-tables/frequency-maps.md
 
 plugins:
   - search
