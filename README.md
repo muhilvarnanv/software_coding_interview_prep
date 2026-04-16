@@ -52,6 +52,37 @@ This repo uses **[peaceiris/actions-gh-pages](https://github.com/peaceiris/actio
 
 Your site URL appears on **Settings → Pages** (for example `https://muhilvarnanv.github.io/software_coding_interview_prep/`).
 
+### Live URL only shows `README.md` (not the MkDocs site)
+
+That means Pages is still publishing the **`main`** branch (repo root), where there is **no** `index.html`—so GitHub shows the README instead of your built site.
+
+1. Open **Settings → Pages** for the repo.
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+3. Choose branch **`gh-pages`** and folder **`/ (root)`** — not `main`, and not `/docs`.
+4. Save, wait a minute, hard-refresh the site (or open it in a private window).
+
+Sanity check: on GitHub, open the **`gh-pages`** branch in the branch picker. You should see files like **`index.html`**, **`assets/`**, and **`.nojekyll`**. If that branch is missing, run the **Deploy MkDocs to GitHub Pages** workflow on `main` and fix any failed job logs first.
+
+### I can’t find the `gh-pages` branch
+
+**On GitHub (website):** open your repo → **Code** tab → click the branch name (usually **`main`**) on the left of the file list → type **`gh-pages`** in the filter box, or choose **View all branches** and look for **`gh-pages`** there. It is a normal git branch; it does not appear under “Pages” until it exists.
+
+**If `gh-pages` is not in the list at all**, it is only created after the **Deploy MkDocs to GitHub Pages** workflow runs successfully and the **Push site to gh-pages branch** step completes. Do this:
+
+1. Go to **Actions** → **Deploy MkDocs to GitHub Pages** → open the latest run.  
+   - If there is **no** run, push a commit to **`main`** (or **`master`**) or use **Run workflow** on **workflow_dispatch**.
+2. If the job is **red**, open the failed step. Common fix: **Settings → Actions → General → Workflow permissions** → select **Read and write permissions**, then **Save**. The default “read-only” token **cannot push** a new `gh-pages` branch.
+3. Confirm the workflow file exists on your default branch (`main` or `master`); this repo’s workflow runs on pushes to **both** `main` and `master`.
+
+**On your laptop:** after a successful deploy, fetch remotes and list branches:
+
+```bash
+git fetch origin
+git branch -a
+```
+
+You should see **`remotes/origin/gh-pages`**. Checking out that branch locally is optional; GitHub Pages reads it from the remote.
+
 ### If you still see “Creating Pages deployment failed” (404)
 
 That message comes from the **old** flow (`actions/deploy-pages`). After you pull the latest workflow from this repo, you should **not** see that step anymore. If Pages is still set to **GitHub Actions**, switch it to **Deploy from a branch** → **`gh-pages`** → **`/`** as above.
