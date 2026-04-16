@@ -8,7 +8,8 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   language: en
-  logo: material/code-tags
+  icon:
+    logo: material/code-tags
   font:
     text: IBM Plex Sans
     code: JetBrains Mono
