@@ -104,7 +104,7 @@ nav:
           - problems/cyclic-sort/find-all-numbers-disappeared.md
           - problems/cyclic-sort/find-the-duplicate-number.md
           - problems/cyclic-sort/set-mismatch.md
-          - problems/cyclic-sort/missing-number-in-place.md
+          - problems/cyclic-sort/find-all-duplicates-in-array.md
   - Code patterns:
       - code-patterns/index.md
       - code-patterns/sliding-window.md

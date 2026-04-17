@@ -6,7 +6,7 @@
 
 Given an array `nums` of `n` integers where `nums[i]` is in `[1, n]`, return an array of all the integers in `[1, n]` that do **not** appear in `nums`.
 
-Could you do it without extra space and in `O(n)` runtime? (Marking indices in-place is the usual trick.)
+Could you do it without extra space and in `O(n)` runtime? **Cyclic sort** (swap each value toward index `value - 1`) is a common in-place approach; index negation is another.
 
 ## Examples
 
@@ -21,30 +21,43 @@ Could you do it without extra space and in `O(n)` runtime? (Marking indices in-p
 
 ## Approach (beginner friendly)
 
-For each value `x`, mark index `x - 1` as “seen” by flipping the sign negative (or adding `n`). Numbers whose slots stay positive never had a visitor.
+Because every element lies in `[1, n]`, value `v` “belongs” at index `v - 1`. Walk with index `i`: if `nums[i]` is not already equal to `nums[nums[i] - 1]`, **swap** `nums[i]` into its correct slot and try again (do not advance `i` until `nums[i]` is either in place or a duplicate blocked a swap). When every value that appears has been routed, each index `j` with `nums[j] != j + 1` means `j + 1` is missing.
 
-**Two conceptual passes:** one to mark, one to collect missing indices.
+**Two conceptual phases:** cyclic-sort placement, then one linear scan to collect `j + 1` where the slot is wrong.
 
 ## Solution (Python)
 
 ```python
-def find_disappeared_numbers(nums: list[int]) -> list[int]:
+def findDisappearedNumbers(nums):
+    i = 0
     n = len(nums)
-    for x in nums:
-        i = abs(x) - 1
-        nums[i] = -abs(nums[i])
 
-    return [i + 1 for i in range(n) if nums[i] > 0]
+    while i < n:
+        correct = nums[i] - 1
+
+        # Place nums[i] at correct position
+        if nums[i] != nums[correct]:
+            nums[i], nums[correct] = nums[correct], nums[i]
+        else:
+            i += 1
+
+    # Find missing numbers
+    result = []
+    for i in range(n):
+        if nums[i] != i + 1:
+            result.append(i + 1)
+
+    return result
 
 
-def find_disappeared_numbers_copy(nums: list[int]) -> list[int]:
+def findDisappearedNumbersCopy(nums):
     """Non-mutating wrapper for tests."""
-    return find_disappeared_numbers(nums.copy())
+    return findDisappearedNumbers(nums.copy())
 
 
-out = find_disappeared_numbers_copy([4, 3, 2, 7, 8, 2, 3, 1])
+out = findDisappearedNumbersCopy([4, 3, 2, 7, 8, 2, 3, 1])
 assert sorted(out) == [5, 6]
-assert find_disappeared_numbers_copy([1, 1]) == [2]
+assert findDisappearedNumbersCopy([1, 1]) == [2]
 ```
 
 ## Complexity

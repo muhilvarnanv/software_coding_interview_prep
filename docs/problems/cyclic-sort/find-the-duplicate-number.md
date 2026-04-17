@@ -6,7 +6,7 @@
 
 Given an array `nums` containing `n + 1` integers where each integer is in `[1, n]` **inclusive**, there is **exactly one** repeated number. Return that duplicate.
 
-**Constraints (common interview version):** do **not** modify the array, use only **O(1)** extra memory. (Floyd’s cycle on indices meets this; cyclic sort swaps would modify the array.)
+**Variant on this page:** mutate `nums` in place with **cyclic sort** — `O(n)` time, `O(1)` extra space. A stricter variant forbids modifying the array; **Floyd’s tortoise and hare** on index jumps solves that (see the approach note and [cycle detection](../tortoise-hare/linked-list-cycle-ii.md)).
 
 ## Examples
 
@@ -20,26 +20,31 @@ Given an array `nums` containing `n + 1` integers where each integer is in `[1, 
 
 ## Approach (beginner friendly)
 
-Treat indices as nodes and `nums[i]` as `next` pointer. Because values live in `[1, n]` for `n+1` elements, there is a **cycle**; the duplicate is the **entrance** of that cycle—same phase-2 trick as [linked list cycle II](../tortoise-hare/linked-list-cycle-ii.md).
+**Cyclic sort (shown below):** each value `v` belongs at index `v - 1`. Swap `nums[i]` toward its home until `nums[i] == nums[correct]` (two equal values means the duplicate sits in the wrong slot) or it is already correct, then advance `i`. After placement, exactly one index `j` has `nums[j] != j + 1`; that **value** `nums[j]` is the duplicate.
 
-**Alternative:** cyclic sort would place each value at `value-1` until the duplicate blocks a swap—great when mutation is allowed.
+**Read-only `O(1)` extra:** treat indices as nodes and `nums[i]` as a `next` pointer; values in `[1, n]` with `n + 1` slots force a **cycle**, and the duplicate is the cycle’s **entrance**—same idea as [linked list cycle II](../tortoise-hare/linked-list-cycle-ii.md).
 
 ## Solution (Python)
 
 ```python
-def find_duplicate(nums: list[int]) -> int:
-    slow = fast = nums[0]
-    while True:
-        slow = nums[slow]
-        fast = nums[nums[fast]]
-        if slow == fast:
-            break
+def find_duplicate(nums):
+    i = 0
+    n = len(nums)
 
-    slow = nums[0]
-    while slow != fast:
-        slow = nums[slow]
-        fast = nums[fast]
-    return slow
+    # Phase 1: place elements
+    while i < n:
+        correct = nums[i] - 1
+        if nums[i] != nums[correct]:
+            nums[i], nums[correct] = nums[correct], nums[i]
+        else:
+            i += 1
+
+    # Phase 2: detect duplicate
+    for i in range(n):
+        if nums[i] != i + 1:
+            return nums[i]
+
+    return -1
 
 
 assert find_duplicate([1, 3, 4, 2, 2]) == 2
@@ -49,4 +54,4 @@ assert find_duplicate([3, 1, 3, 4, 2]) == 3
 ## Complexity
 
 - **Time:** `O(n)`.
-- **Space:** `O(1)` — only pointers.
+- **Space:** `O(1)` extra — the array is rearranged in place (no auxiliary structure proportional to `n`).
