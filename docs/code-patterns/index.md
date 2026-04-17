@@ -9,7 +9,7 @@ Interview coding rounds often reduce to a small set of **patterns** applied to d
 - **[Two pointers](two-pointer.md)** — opposite ends vs same-direction scans; pairs, partitions, and merges.
 - **[Tortoise and hare](tortoise-hare.md)** — two speeds on one path; cycle detection and related tricks on lists or iterated functions.
 - **[Two-pass scanning](two-pass.md)** — multiple linear scans when pass one gathers what pass two needs.
-- **[Bit manipulation](bit-manipulation.md)** — XOR/masks/shifts for compact constant-space solutions on integers.
+- **[Bit manipulation](bit-manipulation.md)** — XOR/masks/shifts; **[Hamming weight](../concept-library/hamming-weight.md)** when you need a **popcount** / set-bit count.
 - **[Cyclic sort](cyclic-sort.md)** — route each value to its index mailbox for bounded 1..n style arrays.
 
 ## Practice by pattern

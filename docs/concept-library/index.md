@@ -5,6 +5,7 @@ This section collects **short explanations** for words and ideas that show up in
 ## Concepts
 
 - **[Contiguous segment](contiguous-segment.md)** — one **unbroken** chunk of an array or string: consecutive indices, no gaps, no reordering.
+- **[Hamming weight](hamming-weight.md)** — count of **`1` bits** in a number’s binary form; same idea as **popcount** / **set-bit count**.
 - **[Monotonic progress](monotonic-progress.md)** — pointers or window edges **keep moving forward** (in one direction) so each position is touched only a few times—why many scans are fast.
 - **[Subsequence](subsequence.md)** — pick elements **in order** with **skips** allowed; not the same as one contiguous block.
 

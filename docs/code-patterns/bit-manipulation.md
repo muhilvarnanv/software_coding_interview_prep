@@ -35,6 +35,30 @@ Many problems have a short **O(1)-per-bit** solution that avoids extra data stru
 
 ---
 
+## Python: core bit operators
+
+```python
+x, y = 0b1100, 0b1010  # 12, 10
+
+x & y   # AND:  bits set where both are 1  -> 0b1000 (8)
+x | y   # OR:   bits set where either is 1 -> 0b1110 (14)
+x ^ y   # XOR:  bits set where they differ  -> 0b0110 (6)
+~x      # NOT:  flips all bits (Python: arbitrary width; often mask for fixed width)
+x << 2  # left shift:  multiply by 2**2
+x >> 2  # right shift: floor divide by 2**2 (sign-aware for negatives)
+
+# Common interview idioms (unsigned-style; mask to 32 bits if needed)
+x & 1              # lowest bit (parity)
+x & (x - 1)        # clear lowest set bit
+x & -x             # isolate lowest set bit (two’s complement trick)
+x | (1 << k)       # set bit k
+x & ~(1 << k)      # clear bit k
+x ^ (1 << k)       # flip bit k
+(x >> k) & 1       # read bit k
+```
+
+---
+
 ## Pitfalls
 
 - **Operator precedence** — mix `&` with `==` carefully; use parentheses.
@@ -53,7 +77,7 @@ XOR them all: duplicates cancel (`x^x=0`); result is **`4`**.
 
 ## After you solve a problem
 
-- Which **bit identity** did I use (XOR, mask, popcount)?
+- Which **bit identity** did I use (XOR, mask, **[Hamming weight / popcount](../concept-library/hamming-weight.md)**)?
 - Would a **hash set** have been simpler at the same complexity?
 - Did I respect **integer width** assumptions?
 

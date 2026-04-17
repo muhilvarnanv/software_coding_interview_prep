@@ -4,7 +4,7 @@
 
 ## Problem
 
-Given a positive integer `n`, return the number of **set bits** in its binary representation (also known as the **Hamming weight**).
+Given a positive integer `n`, return the number of **set bits** in its binary representation—that count is the **[Hamming weight](../../concept-library/hamming-weight.md)**.
 
 ## Examples
 
@@ -18,7 +18,7 @@ Given a positive integer `n`, return the number of **set bits** in its binary re
 
 ## Approach (beginner friendly)
 
-Repeatedly clear the **lowest set bit** with `n &= n - 1` until `n` becomes `0`. Each iteration removes exactly one `1`, so the loop count is the Hamming weight.
+Repeatedly clear the **lowest set bit** with `n &= n - 1` until `n` becomes `0`. Each iteration removes exactly one `1`, so the loop count is the **[Hamming weight](../../concept-library/hamming-weight.md)**.
 
 ## Solution (Python)
 
