@@ -13,19 +13,8 @@ If `len(nums) < k`, you can return `0` (or follow your interviewer’s conventio
 **Example 1**
 
 - Input: `nums = [1, 4, 2, 10, 23, 3, 1, 0, 20]`, `k = 3`
-- Output: `39`
-- Explanation: The subarray `[10, 23, 3]` has sum `36` is not max; `[4, 2, 10]` = `16`; best window is `[3, 1, 20]` → wait let me recalculate.
-
-Actually: windows of size 3:
-- 1+4+2 = 7
-- 4+2+10 = 16
-- 2+10+23 = 35
-- 10+23+3 = 36
-- 23+3+1 = 27
-- 3+1+0 = 4
-- 1+0+20 = 21
-
-Max is 36. Let me fix example output to 36.
+- Output: `36`
+- Explanation: among all length-`3` contiguous subarrays, `[10, 23, 3]` has the largest sum (`10 + 23 + 3 = 36`).
 
 **Example 2**
 
@@ -55,7 +44,6 @@ def max_sum_subarray(nums: list[int], k: int) -> int:
     return best
 
 
-# Example checks
 assert max_sum_subarray([1, 4, 2, 10, 23, 3, 1, 0, 20], 3) == 36
 assert max_sum_subarray([5, 1, 2], 2) == 6
 ```

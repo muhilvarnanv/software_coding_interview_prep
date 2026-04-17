@@ -14,7 +14,7 @@ Return the length of the **longest substring** you can obtain that contains **on
 
 - Input: `s = "AABABBA"`, `k = 1`
 - Output: `4`
-- Explanation: Change one `B` in `"AABBA"` to get `"AAAAA"` substring length… Actually optimal is `"AABBA"` → longest with one change: `"ABBA"` with A? Classic answer 4 for "AABABBA", k=1 → substring "AABA" or similar length 4.
+- Explanation: One substring of length 4 is `"AABA"` (change the middle `B` to `A`).
 
 **Example 2**
 
@@ -31,45 +31,47 @@ If the most frequent character inside the window appears `max_freq` times, then 
 (\text{window length} - \text{max\_freq}) \le k
 \]
 
-replacements (everything that is not the majority letter). If that holds, the window is **valid**—you can imagine changing all non-majority letters.
+replacements (everything that is not the majority letter). If that holds, the window is **valid**.
 
-Grow `right`. Whenever the condition breaks, move `left` forward until it holds again. Track the maximum valid length.
+Grow `right` each step. When the inequality fails, advance `left` once and drop `s[left]` from the counts. Track the maximum window length.
 
-**Interview tip:** you do not need to shrink to the “tightest” window every time; moving `left` one step when invalid still works in `O(n)` if implemented carefully. A common template: increment `right`, update counts, while invalid shrink `left` and update counts.
+**Interview notes**
+
+- `max_freq` does **not** have to decrease when you shrink; it can be a **stale** upper bound. That is fine: you never falsely accept an invalid window, and the algorithm stays linear.
+- A frequency **dict** works for any alphabet; a length-26 array is a common micro-optimization when `s` is uppercase `A`–`Z` only.
 
 ## Solution (Python)
 
 ```python
-def character_replacement(s: str, k: int) -> int:
-    # Uppercase English letters only (LeetCode-style constraint).
-    counts = [0] * 26
+def characterReplacement(s: str, k: int) -> int:
+    count = {}
     left = 0
-    best = 0
     max_freq = 0
-
-    def ci(ch: str) -> int:
-        return ord(ch) - ord("A")
+    res = 0
 
     for right in range(len(s)):
-        counts[ci(s[right])] += 1
-        max_freq = max(max_freq, counts[ci(s[right])])
+        # Step 1: include current char
+        count[s[right]] = count.get(s[right], 0) + 1
 
-        # If invalid, shrink. max_freq may be "stale" but the window size never exceeds best+k,
-        # which keeps the overall scan linear for bounded alphabet.
+        # Step 2: update max frequency
+        max_freq = max(max_freq, count[s[right]])
+
+        # Step 3: check if window is invalid
         if (right - left + 1) - max_freq > k:
-            counts[ci(s[left])] -= 1
+            count[s[left]] -= 1
             left += 1
 
-        best = max(best, right - left + 1)
+        # Step 4: update result
+        res = max(res, right - left + 1)
 
-    return best
+    return res
 
 
-assert character_replacement("ABAB", 2) == 4
-assert character_replacement("AABABBA", 1) == 4
+assert characterReplacement("ABAB", 2) == 4
+assert characterReplacement("AABABBA", 1) == 4
 ```
 
 ## Complexity
 
-- **Time:** `O(n)` with a small constant for a 26-letter alphabet.
-- **Space:** `O(1)` — fixed array of length 26.
+- **Time:** `O(n)` — `right` and `left` each move at most `n` steps.
+- **Space:** `O(min(n, |\Sigma|))` for the frequency map (at most one entry per distinct character in the window; for uppercase English letters, `O(26)` which is `O(1)` extra).

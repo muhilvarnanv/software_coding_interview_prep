@@ -27,11 +27,12 @@ Return indices in **any order** (sorted ascending is fine).
 
 Compare **character counts**:
 
-1. Count letters in `p` → `need`.
-2. Slide a window of length `m` along `s`, maintaining counts of the current window → `window`.
-3. Whenever `window == need`, record the start index.
+1. Count letters in `p` → `p_count`.
+2. Walk `s` with `right`, growing `window` with `Counter`.
+3. When the window is longer than `m`, shrink from the **left**: decrement (and drop zero counts) until the window has length `m` again.
+4. Whenever `window == p_count`, append `left` (the window’s start index).
 
-Updating counts when the window slides by one: **remove** the char leaving the left edge, **add** the char entering the right edge — **O(1)** per step.
+Each step only **adds** one character on the right and sometimes **removes** one on the left — **O(1)** amortized per index.
 
 ## Solution (Python)
 
@@ -40,31 +41,31 @@ from collections import Counter
 
 
 def find_anagrams(s: str, p: str) -> list[int]:
-    m, n = len(p), len(s)
-    if m > n:
+    if len(p) > len(s):
         return []
 
-    need = Counter(p)
-    window = Counter(s[:m])
-    out: list[int] = []
+    p_count = Counter(p)
+    window = Counter()
 
-    if window == need:
-        out.append(0)
+    result: list[int] = []
+    left = 0
 
-    for right in range(m, n):
-        left_char = s[right - m]
-        right_char = s[right]
+    for right in range(len(s)):
+        # expand window
+        window[s[right]] += 1
 
-        window[right_char] = window.get(right_char, 0) + 1
+        # keep window size == len(p)
+        if right - left + 1 > len(p):
+            window[s[left]] -= 1
+            if window[s[left]] == 0:
+                del window[s[left]]
+            left += 1
 
-        window[left_char] -= 1
-        if window[left_char] == 0:
-            del window[left_char]
+        # check match
+        if window == p_count:
+            result.append(left)
 
-        if window == need:
-            out.append(right - m + 1)
-
-    return out
+    return result
 
 
 assert find_anagrams("cbaebabacd", "abc") == [0, 6]
