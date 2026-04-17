@@ -20,23 +20,29 @@ Given an integer array `nums`, return an array `answer` where `answer[i]` is the
 
 ## Approach (beginner friendly)
 
-You cannot know “max to the right of `i`” until you have scanned **everything right of `i``.**
+You cannot know “max to the right of `i`” until you have scanned **everything right of `i`**.
 
-**Pass 1 (right to left):** track `running_max` and fill `answer[i]` as the max seen **strictly to the right** so far (before incorporating `nums[i]` into the running max for the next left index).
+**Pass 1 (right to left):** build `suffix_max[i]` = maximum among `nums[i+1], …, nums[n-1]`. The last index has nothing to the right, so `suffix_max[n-1] = -1`. For each `i` leftward, `suffix_max[i] = max(nums[i + 1], suffix_max[i + 1])` — the bigger of “the immediate neighbor on the right” and “everything that was already to the right of that neighbor.”
 
-Alternatively: first build suffix maxima in an array, then read it—same idea, two conceptual passes.
+**Pass 2 (left to right):** copy `suffix_max` into the answer array (you could also `return suffix_max` after pass 1; the second loop is only to separate “compute suffix” from “emit answer” if you like that shape).
+
+A different one-pass-from-the-right variant keeps a single `running_max` and fills the answer in one reverse scan with **`O(1)`** extra space; this page uses the explicit **suffix table** instead.
 
 ## Solution (Python)
 
 ```python
 def replace_elements(nums: list[int]) -> list[int]:
     n = len(nums)
-    answer = [0] * n
-    running_max = -1  # no elements to the right of last index
 
-    for i in range(n - 1, -1, -1):
-        answer[i] = running_max
-        running_max = max(running_max, nums[i])
+    suffix_max = [0] * n
+    suffix_max[n - 1] = -1
+
+    for i in range(n - 2, -1, -1):
+        suffix_max[i] = max(nums[i + 1], suffix_max[i + 1])
+
+    answer = [0] * n
+    for i in range(n):
+        answer[i] = suffix_max[i]
 
     return answer
 
@@ -48,4 +54,4 @@ assert replace_elements([400]) == [-1]
 ## Complexity
 
 - **Time:** `O(n)`.
-- **Space:** `O(1)` extra besides the output array.
+- **Space:** `O(n)` for `suffix_max` (plus `answer`, which is required output anyway). You can drop `answer` and `return suffix_max` after pass 1 to save one pass and one array alias.

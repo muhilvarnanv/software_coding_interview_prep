@@ -89,7 +89,7 @@ nav:
           - problems/two-pass/remove-nth-node-from-end.md
           - problems/two-pass/replace-with-greatest-on-right.md
           - problems/two-pass/valid-anagram.md
-          - problems/two-pass/sort-array-by-parity.md
+          - problems/two-pass/shortest-distance-to-character.md
           - problems/two-pass/relative-sort-array.md
       - Bit manipulation:
           - problems/bit-manipulation/index.md

@@ -20,13 +20,58 @@ Assume lowercase English letters unless your interviewer says otherwise.
 
 ## Approach (beginner friendly)
 
-**Pass 1:** count letters in `s` (increment buckets).
+**Pass 1:** count letters in `s` (increment buckets in a plain dict or a `Counter`).
 
-**Pass 2:** walk `t` and decrement buckets. If any bucket goes negative, `t` has an extra letter. Afterward, all buckets must be zero.
+**Pass 2:** walk `t` and decrement buckets. If a character is missing from the map, or any bucket goes **negative**, `t` cannot match `s`. With equal lengths, finishing pass 2 without failure means every count is **zero** (you do not need an extra “all zero” scan unless you prefer it for clarity).
 
 Sorting both strings also works (`O(n log n)`), but the **two-pass counting** template is linear time.
 
 ## Solution (Python)
+
+### Explicit dictionary (two passes)
+
+```python
+def is_anagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+
+    freq: dict[str, int] = {}
+    for ch in s:
+        freq[ch] = freq.get(ch, 0) + 1
+
+    for ch in t:
+        if ch not in freq:
+            return False
+        freq[ch] -= 1
+        if freq[ch] < 0:
+            return False
+
+    return True
+
+
+assert is_anagram("anagram", "nagaram") is True
+assert is_anagram("rat", "car") is False
+```
+
+The same assertions hold for the `Counter` versions below (identical behavior).
+
+### `collections.Counter` (shorter abstraction)
+
+Same multiset check, expressed as “count `s`, count `t`, compare”:
+
+```python
+from collections import Counter
+
+
+def is_anagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    return Counter(s) == Counter(t)
+```
+
+### Previous variant: `Counter` + decrement on `t` + `all(...)`
+
+This is the same decrement idea as the dict version, but starts from `Counter(s)` and ends with an explicit “every bucket zero” check (redundant when lengths are equal and the loop completes, but some readers like the explicit invariant):
 
 ```python
 from collections import Counter
@@ -41,10 +86,6 @@ def is_anagram(s: str, t: str) -> bool:
         if counts[ch] < 0:
             return False
     return all(v == 0 for v in counts.values())
-
-
-assert is_anagram("anagram", "nagaram") is True
-assert is_anagram("rat", "car") is False
 ```
 
 ## Complexity
