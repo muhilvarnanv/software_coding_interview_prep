@@ -20,6 +20,7 @@ Return indices in **any order** (sorted ascending is fine).
 
 - Input: `s = "abab"`, `p = "ab"`
 - Output: `[0, 1, 2]`
+- Explanation: `p` has length `2`. Every length-`2` window in `abab` is either `ab` or `ba`, and both are anagrams of `ab`, so valid windows start at indices `0`, `1`, and `2`.
 
 ## Approach (beginner friendly)
 

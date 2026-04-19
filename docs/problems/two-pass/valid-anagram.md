@@ -13,10 +13,12 @@ Assume lowercase English letters unless your interviewer says otherwise.
 **Example 1**
 
 - `s = "anagram"`, `t = "nagaram"` → `True`
+- Explanation: Both strings use the same letters the same number of times (three `a`s, two `n`s, one `g`, one `r`, one `m`), just in a different order.
 
 **Example 2**
 
 - `s = "rat"`, `t = "car"` → `False`
+- Explanation: `rat` has one `t`, but `car` has one `c` instead, so the letter counts do not match.
 
 ## Approach (beginner friendly)
 

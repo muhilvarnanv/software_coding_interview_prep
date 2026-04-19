@@ -16,11 +16,13 @@ You must solve it **in place**—do not return a new array; modify `nums1`.
 
 - Input: `nums1 = [1, 2, 3, 0, 0, 0]`, `m = 3`, `nums2 = [2, 5, 6]`, `n = 3`
 - After merge: `nums1` should be `[1, 2, 2, 3, 5, 6]`
+- Explanation: You merge `[1, 2, 3]` with `[2, 5, 6]` like merge-sort: `1`, then `2` from `nums1`, then `2` from `nums2`, then `3`, then `5`, then `6`.
 
 **Example 2**
 
 - Input: `nums1 = [1]`, `m = 1`, `nums2 = []`, `n = 0`
 - After merge: `[1]`
+- Explanation: There is nothing to pull in from `nums2`, so `nums1` stays `[1]`.
 
 ## Approach (beginner friendly)
 

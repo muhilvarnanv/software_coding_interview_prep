@@ -18,16 +18,13 @@ Given an integer array `nums`, return the **smallest index** `p` such that the s
 
 - Input: `nums = [1, 2, 3]`
 - Output: `-1`
+- Explanation: At index `0` the right side sums to `5`, not `0`. At index `1` left is `1` and right is `3`. At index `2` left is `3` and right is `0`. No index balances, so return `-1`.
 
 ## Approach (beginner friendly)
 
 Let `total` be the sum of the whole array. As you scan `p` from left to right, keep `left_sum`, the sum of elements before `p`.
 
-The right sum is `total - left_sum - nums[p]`. You want `left_sum == total - left_sum - nums[p]`, which rearranges to:
-
-\[
-2 \cdot left\_sum + nums[p] = total
-\]
+The right sum is `total - left_sum - nums[p]`. You want those sides to match, which is the same as checking **`2 * left_sum + nums[p] == total`**.
 
 No extra prefix array is required—just one pass after computing `total`.
 

@@ -14,6 +14,25 @@ Short, interview-style problems grouped by pattern. Each page has a clear statem
 | **Bit manipulation** | [5 problems](bit-manipulation/index.md) |
 | **Cyclic sort** | [5 problems](cyclic-sort/index.md) |
 
+## Interview practice (by data structure)
+
+Five well-known problems per topic. **No problem title is reused** across these topic sets (each problem is assigned to exactly one topic).
+
+| Topic | Set |
+|------|-----|
+| **Arrays** | [5 problems](arrays/index.md) |
+| **Linked lists** | [5 problems](linked-lists/index.md) |
+| **Hash maps** | [5 problems](hash-maps/index.md) |
+| **Strings** | [5 problems](strings/index.md) |
+| **Graphs** | [5 problems](graphs/index.md) |
+| **Trees** | [5 problems](trees/index.md) |
+| **Stacks** | [5 problems](stacks/index.md) |
+| **Queues** | [5 problems](queues/index.md) |
+| **Heaps** | [5 problems](heaps/index.md) |
+| **Recursion** | [5 problems](recursion/index.md) |
+| **Backtracking** | [5 problems](backtracking/index.md) |
+| **Dynamic programming** | [5 problems](dynamic-programming/index.md) |
+
 ## Pattern notes (theory)
 
 - [Sliding window](../code-patterns/sliding-window.md)

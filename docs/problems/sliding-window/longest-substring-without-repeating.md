@@ -18,6 +18,7 @@ Given a string `s`, return the length of the **longest substring** that contains
 
 - Input: `s = "bbbbb"`
 - Output: `1`
+- Explanation: Every substring longer than one `b` would repeat `b`, so the best you can do is a single character, length `1`.
 
 **Example 3**
 

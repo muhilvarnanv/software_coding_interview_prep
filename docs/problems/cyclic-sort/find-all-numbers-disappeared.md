@@ -14,10 +14,12 @@ Could you do it without extra space and in `O(n)` runtime? **Cyclic sort** (swap
 
 - `nums = [4, 3, 2, 7, 8, 2, 3, 1]`
 - Output: `[5, 6]` (order may vary)
+- Explanation: The array length is `8`, so every value from `1` to `8` should appear once. After sorting values into their “home” slots, `5` and `6` never show up.
 
 **Example 2**
 
 - `nums = [1, 1]` → `[2]`
+- Explanation: With length `2`, you expect `{1, 2}`. You see `1` twice, so `2` is the only number from `1..2` that is missing.
 
 ## Approach (beginner friendly)
 

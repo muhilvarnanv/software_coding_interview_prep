@@ -14,11 +14,13 @@ Sort the elements of `arr1` such that the relative ordering of items **only in `
 
 - `arr1 = [2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19]`, `arr2 = [2, 1, 4, 3, 9, 6]`
 - Output: `[2, 2, 2, 1, 4, 3, 3, 9, 6, 7, 19]`
+- Explanation: First emit all `2`s, then the one `1`, then `4`, then both `3`s, then `9`, then `6`, following `arr2`. Values not listed in `arr2` (`7` and `19`) go at the end in ascending order.
 
 **Example 2**
 
 - `arr1 = [28, 6, 22, 8, 44, 17]`, `arr2 = [22, 28, 8, 6]`
 - Output: `[22, 28, 8, 6, 17, 44]`
+- Explanation: Order the `arr2` keys as they appear (`22`, `28`, `8`, `6`). Append leftover values sorted: `17` then `44`.
 
 ## Approach (beginner friendly)
 

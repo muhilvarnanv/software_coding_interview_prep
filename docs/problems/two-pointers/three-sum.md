@@ -17,11 +17,13 @@ The order of triplets and the order inside a triplet do not matter, but you must
 
 - Input: `nums = [-1, 0, 1, 2, -1, -4]`
 - Output: `[[-1, -1, 2], [-1, 0, 1]]` (order may vary)
+- Explanation: Sorting helps skip duplicates. One triple uses two `-1`s with `2` to reach `0`; another uses `-1, 0, 1`. No other unique triples sum to `0`.
 
 **Example 2**
 
 - Input: `nums = [0, 1, 1]`
 - Output: `[]`
+- Explanation: You need three different positions. The only way to sum to `0` would need a negative number to balance the `1`s, but there is no negative value here, so no triplet works.
 
 ## Approach (beginner friendly)
 
@@ -41,31 +43,36 @@ Overall time is `O(n^2)` after the sort.
 ```python
 def three_sum(nums: list[int]) -> list[list[int]]:
     nums.sort()
-    n = len(nums)
-    out: list[list[int]] = []
+    result = []
 
-    for i in range(n):
+    for i in range(len(nums)):
+        # Skip duplicates for i
         if i > 0 and nums[i] == nums[i - 1]:
             continue
-        target = -nums[i]
-        left, right = i + 1, n - 1
+        
+        left = i + 1
+        right = len(nums) - 1
 
         while left < right:
-            s = nums[left] + nums[right]
-            if s == target:
-                out.append([nums[i], nums[left], nums[right]])
+            total = nums[i] + nums[left] + nums[right]
+
+            if total < 0:
                 left += 1
+            elif total > 0:
                 right -= 1
-                while left < right and nums[left] == nums[left - 1]:
-                    left += 1
-                while left < right and nums[right] == nums[right + 1]:
-                    right -= 1
-            elif s < target:
-                left += 1
             else:
+                result.append([nums[i], nums[left], nums[right]])
+
+                # Skip duplicates for left & right
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+
+                left += 1
                 right -= 1
 
-    return out
+    return result
 
 
 def normalize(triplets: list[list[int]]) -> set[tuple[int, int, int]]:
@@ -78,5 +85,5 @@ assert three_sum([0, 1, 1]) == []
 
 ## Complexity
 
-- **Time:** `O(n^2)` after `O(n log n)` sort (sort dominated by `n^2` for large `n` in Big-O notation: strictly `O(n^2)` if you say sort is preprocessing).
-- **Space:** `O(1)` extra besides the output list (sort may use `O(log n)` stack depending on implementation).
+- **Time:** `O(n^2)` — sorting is `O(n log n)`, then each of the `n` outer steps does a linear two-pointer scan; the `n^2` term wins.
+- **Space:** `O(1)` extra besides the output list (the sort may use `O(log n)` stack space inside the sort implementation).

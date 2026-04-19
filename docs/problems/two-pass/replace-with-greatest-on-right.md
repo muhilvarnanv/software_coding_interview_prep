@@ -12,11 +12,13 @@ Given an integer array `nums`, return an array `answer` where `answer[i]` is the
 
 - `nums = [17, 18, 5, 4, 6, 1]`
 - Output: `[18, 6, 6, 6, 1, -1]`
+- Explanation: At index `0`, everything to the right tops out at `18`. At index `1`, the best to the right is `max(5,4,6,1)=6`, and that pattern continues until the last slot, which has no neighbors to the right so the answer is `-1`.
 
 **Example 2**
 
 - `nums = [400]`
 - Output: `[-1]`
+- Explanation: A single element has no values on its right side, so the rule returns `-1`.
 
 ## Approach (beginner friendly)
 

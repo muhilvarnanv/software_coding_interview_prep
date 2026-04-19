@@ -13,10 +13,12 @@ Given an array `nums` containing `n + 1` integers where each integer is in `[1, 
 **Example 1**
 
 - `nums = [1, 3, 4, 2, 2]` → `2`
+- Explanation: Values should be `1` through `4` each once, but `2` appears twice, so `2` is the duplicate.
 
 **Example 2**
 
 - `nums = [3, 1, 3, 4, 2]` → `3`
+- Explanation: `3` shows up twice while every other value in `1..4` appears once, so the repeated value is `3`.
 
 ## Approach (beginner friendly)
 

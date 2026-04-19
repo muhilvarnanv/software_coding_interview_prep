@@ -20,6 +20,7 @@ Find two lines that together with the x-axis form a container that holds the **m
 
 - Input: `height = [1, 1]`
 - Output: `1`
+- Explanation: You must pick the two lines, so width is `1` and water height is `min(1, 1) = 1`, so area is `1`.
 
 ## Approach (beginner friendly)
 

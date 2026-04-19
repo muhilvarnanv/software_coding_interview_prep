@@ -13,10 +13,12 @@ Follow-up goal (common interview ask): **O(1) extra space**—do not copy the wh
 **Example 1**
 
 - `1 → 2 → 2 → 1` → `True`
+- Explanation: Reading forward or backward gives `1, 2, 2, 1`.
 
 **Example 2**
 
 - `1 → 2` → `False`
+- Explanation: Forward is `1, 2` but backward would be `2, 1`, so it fails the palindrome check.
 
 ## Approach (beginner friendly)
 

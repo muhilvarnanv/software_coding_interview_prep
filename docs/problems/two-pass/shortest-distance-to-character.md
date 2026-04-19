@@ -14,11 +14,13 @@ The distance between indices `i` and `j` is `abs(i - j)`.
 
 - `s = "loveleetcode"`, `c = "e"`
 - Output: `[3, 2, 0, 1, 0, 0, 1, 2, 2, 1, 0]`
+- Explanation: Each answer slot is “how far to the nearest `e`.” For instance index `0` (`l`) is three steps from the first `e`, while indices where `s[i]` is `e` are distance `0`.
 
 **Example 2**
 
 - `s = "aaab"`, `c = "b"`
 - Output: `[3, 2, 1, 0]`
+- Explanation: The only `b` is at the last index, so distances count down `3, 2, 1, 0` as you move right toward that `b`.
 
 ## Approach (beginner friendly)
 

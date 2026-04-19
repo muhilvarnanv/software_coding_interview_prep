@@ -12,6 +12,7 @@ Reverse bits of a given **32-bit unsigned** integer.
 
 - Input: `n = 43261596` (binary `00000010100101000001111010011100`)
 - Output: `964176192` (binary `00111001011110000010100101000000`)
+- Explanation: Reversing bits mirrors the 32-bit pattern left-to-right, so the high bit of the input becomes the low bit of the output (and vice versa), which turns that specific bit pattern into `964176192`.
 
 For tests below, use small numbers and masks to keep the example readable.
 

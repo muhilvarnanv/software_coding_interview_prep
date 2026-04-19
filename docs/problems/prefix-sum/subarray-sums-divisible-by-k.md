@@ -12,17 +12,19 @@ Given an integer array `nums` and an integer `k`, return the number of **non-emp
 
 - Input: `nums = [4, 5, 0, -2, -3, 1]`, `k = 5`
 - Output: `7`
+- Explanation: These are the seven contiguous subarrays whose sum is divisible by `5`: `[5]`, `[5, 0]`, `[0]`, `[0, -2, -3]`, `[-2, -3]`, `[5, 0, -2, -3]`, and the whole array `[4, 5, 0, -2, -3, 1]` (sums `5`, `5`, `0`, `-5`, `-5`, `0`, and `5`).
 
 **Example 2**
 
 - Input: `nums = [5]`, `k = 9`
 - Output: `0`
+- Explanation: The only subarray sums to `5`, and `5` is not divisible by `9`, so the answer is `0`.
 
 ## Approach (beginner friendly)
 
 Work with **prefix sums** `cur` as you walk the array. A subarray ending at index `i` has sum divisible by `k` if the **difference** of two prefix sums is divisible by `k`.
 
-In modular arithmetic, store **remainders** of prefix sums mod `k`, adjusted to be in `[0, k - 1]` for negative sums in Python using `(cur % k + k) % k`.
+In modular arithmetic, store **remainders** of prefix sums mod `k`, adjusted into `[0, k - 1]` with `(cur % k + k) % k` so negative running totals behave the same way in every language.
 
 Let `r` be the remainder of the current prefix sum modulo `k`. Any earlier prefix with the **same** remainder forms an ending subarray whose sum is a multiple of `k`. Add `counts[r]` to the answer, then increment `counts[r]`. This is the same “difference of prefixes” picture as [subarray sum equals k](subarray-sum-equals-k.md), but keys are **remainders** instead of raw prefix values.
 
@@ -40,7 +42,7 @@ def subarrays_div_by_k(nums: list[int], k: int) -> int:
 
     for x in nums:
         cur += x
-        r = cur % k
+        r = (cur % k + k) % k  # remainder in [0, k-1], works for negatives in any language
         ans += counts[r]
         counts[r] += 1
 

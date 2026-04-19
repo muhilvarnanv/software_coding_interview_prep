@@ -20,6 +20,7 @@ If `len(nums) < k`, you can return `0` (or follow your interviewer’s conventio
 
 - Input: `nums = [5, 1, 2]`, `k = 2`
 - Output: `6` (subarray `[5, 1]`)
+- Explanation: The only length-`2` windows are `[5, 1]` (sum `6`) and `[1, 2]` (sum `3`), so `6` wins.
 
 ## Approach (beginner friendly)
 

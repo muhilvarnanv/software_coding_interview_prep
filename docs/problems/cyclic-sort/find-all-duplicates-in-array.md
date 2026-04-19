@@ -13,10 +13,12 @@ You may mutate the input.
 **Example 1**
 
 - `nums = [4, 3, 2, 7, 8, 2, 3, 1]` → `[2, 3]` (or `[3, 2]`)
+- Explanation: Values `2` and `3` each appear twice; every other value in `1..8` appears once.
 
 **Example 2**
 
 - `nums = [1, 1, 2]` → `[1]`
+- Explanation: `1` is duplicated while `2` appears only once, so only `1` belongs in the answer list.
 
 ## Approach (beginner friendly)
 

@@ -18,6 +18,7 @@ Given a **1-indexed** integer array `numbers` that is sorted in **non-decreasing
 
 - Input: `numbers = [2, 3, 4]`, `target = 6`
 - Output: `[1, 3]`
+- Explanation: `numbers[1] + numbers[3]` in 1-based wording is `2 + 4 = 6` (indices `0` and `2` in 0-based code, returned as `[1, 3]`).
 
 ## Approach (beginner friendly)
 

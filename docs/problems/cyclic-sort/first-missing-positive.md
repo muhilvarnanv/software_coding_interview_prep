@@ -13,14 +13,17 @@ You must run in **O(n)** time and use **O(1)** extra space (modify the input if 
 **Example 1**
 
 - `nums = [1, 2, 0]` → `3`
+- Explanation: `1` and `2` already appear, so the smallest missing positive integer is `3` (`0` does not count as positive).
 
 **Example 2**
 
 - `nums = [3, 4, -1, 1]` → `2`
+- Explanation: You have `1` but not `2`, and no smaller positive integer is missing, so the answer is `2`.
 
 **Example 3**
 
 - `nums = [7, 8, 9, 11, 12]` → `1`
+- Explanation: None of the entries is `1`, so the smallest missing positive is `1` even though the array is full of larger numbers.
 
 ## Approach (beginner friendly)
 

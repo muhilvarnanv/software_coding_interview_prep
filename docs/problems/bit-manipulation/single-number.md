@@ -11,10 +11,12 @@ Given a non-empty array where **every** element appears **twice** except for **o
 **Example 1**
 
 - `nums = [2, 2, 1]` → `1`
+- Explanation: XOR pairs `2` with `2` and they cancel to `0`, leaving only `1`.
 
 **Example 2**
 
 - `nums = [4, 1, 2, 1, 2]` → `4`
+- Explanation: Both `1`s cancel and both `2`s cancel, so the leftover XOR is `4`.
 
 ## Approach (beginner friendly)
 

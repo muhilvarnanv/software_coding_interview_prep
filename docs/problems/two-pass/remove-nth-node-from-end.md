@@ -14,11 +14,13 @@ Given the `head` of a linked list, remove the **nth** node from the **end** of t
 
 - `1 → 2 → 3 → 4 → 5`, `n = 2` → remove `4`
 - Output: `1 → 2 → 3 → 5`
+- Explanation: Counting from the tail, the `2`nd node is the `4` node, so delete it and bridge `3` to `5`.
 
 **Example 2**
 
 - `1`, `n = 1` → remove the only node
 - Output: `None`
+- Explanation: The list has one node and you remove the first-from-end node, so the list becomes empty.
 
 ## Approach (beginner friendly)
 

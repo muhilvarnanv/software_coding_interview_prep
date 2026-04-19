@@ -20,18 +20,13 @@ Return the length of the **longest substring** you can obtain that contains **on
 
 - Input: `s = "ABAB"`, `k = 2`
 - Output: `4`
+- Explanation: You can turn both `B`s into `A`s (two edits). Then the whole string is `AAAA`, and the longest run of one letter has length `4`. You cannot beat `4` because the string only has four characters.
 
 ## Approach (beginner friendly)
 
 Think about a window `[left, right]` that you want to be **all the same letter** after at most `k` edits.
 
-If the most frequent character inside the window appears `max_freq` times, then the window needs
-
-\[
-(\text{window length} - \text{max\_freq}) \le k
-\]
-
-replacements (everything that is not the majority letter). If that holds, the window is **valid**.
+If the most frequent character inside the window appears `max_freq` times, then you only need to change the other characters in the window. The number of changes is **window length minus `max_freq`**. That count must stay **less than or equal to `k`**. If it does, the window is **valid**.
 
 Grow `right` each step. When the inequality fails, advance `left` once and drop `s[left]` from the counts. Track the maximum window length.
 

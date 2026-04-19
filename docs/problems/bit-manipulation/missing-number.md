@@ -11,10 +11,12 @@ Given an array `nums` containing `n` **distinct** numbers taken from `0, 1, ...,
 **Example 1**
 
 - `nums = [3, 0, 1]` → `2`
+- Explanation: The array should contain each number from `0` to `3` once, but `2` is absent, so `2` is the missing value.
 
 **Example 2**
 
 - `nums = [0, 1]` → `2`
+- Explanation: With two slots you expect `0` and `1`, but the full range is `0..2`, so the missing label is `2`.
 
 ## Approach (beginner friendly)
 

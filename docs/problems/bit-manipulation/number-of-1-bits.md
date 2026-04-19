@@ -11,10 +11,12 @@ Given a positive integer `n`, return the number of **set bits** in its binary re
 **Example 1**
 
 - `n = 11` (binary `1011`) → `3`
+- Explanation: `1011` has three `1` bits.
 
 **Example 2**
 
 - `n = 128` (binary `10000000`) → `1`
+- Explanation: `128` is a single power of two, so its binary form has exactly one `1` bit.
 
 ## Approach (beginner friendly)
 

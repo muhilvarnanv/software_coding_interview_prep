@@ -19,15 +19,17 @@ The array does **not** change after construction.
 - `sumRange(2, 5)` → `-1`
 - `sumRange(0, 5)` → `-3`
 
+Why these answers:
+
+- `sumRange(0, 2)` adds `nums[0]` through `nums[2]`: `-2 + 0 + 3 = 1`.
+- `sumRange(2, 5)` adds `3 + (-5) + 2 + (-1) = -1`.
+- `sumRange(0, 5)` adds every element in the array, which totals `-3`.
+
 ## Approach (beginner friendly)
 
 A range sum is “everything up to `right`” minus “everything before `left`.”
 
-Build a **prefix sum** array `pref` where `pref[i]` is the sum of `nums[0]` … `nums[i - 1]`, with `pref[0] = 0` (the “leading zero” trick). Then:
-
-\[
-\text{sumRange}(left, right) = pref[right + 1] - pref[left]
-\]
+Build a **prefix sum** array `pref` where `pref[i]` is the sum of `nums[0]` … `nums[i - 1]`, with `pref[0] = 0` (the “leading zero” trick). Then **`sumRange(left, right) = pref[right + 1] - pref[left]`**—subtract the sum before `left` from the sum through `right`.
 
 One subtraction per query after `O(n)` preprocessing.
 

@@ -105,6 +105,19 @@ nav:
           - problems/cyclic-sort/find-the-duplicate-number.md
           - problems/cyclic-sort/set-mismatch.md
           - problems/cyclic-sort/find-all-duplicates-in-array.md
+      - By data structure:
+          - problems/arrays/index.md
+          - problems/linked-lists/index.md
+          - problems/hash-maps/index.md
+          - problems/strings/index.md
+          - problems/graphs/index.md
+          - problems/trees/index.md
+          - problems/stacks/index.md
+          - problems/queues/index.md
+          - problems/heaps/index.md
+          - problems/recursion/index.md
+          - problems/backtracking/index.md
+          - problems/dynamic-programming/index.md
   - Code patterns:
       - code-patterns/index.md
       - code-patterns/sliding-window.md

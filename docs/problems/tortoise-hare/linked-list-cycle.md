@@ -14,11 +14,13 @@ Return `True` if there is a cycle, else `False`.
 
 - List `3 → 2 → 0 → -4` and the tail links back to the node with value `2`.
 - Output: `True`
+- Explanation: If you keep following `next`, you never reach the end—you loop through `2 → 0 → -4 → 2 → …`—so a cycle exists.
 
 **Example 2**
 
 - List `1 → 2 → None`
 - Output: `False`
+- Explanation: You walk `1`, then `2`, then run out of links, so the list ends and there is no cycle.
 
 ## Approach (beginner friendly)
 

@@ -20,7 +20,7 @@ The array may contain **negative** numbers and zeros.
 
 - Input: `nums = [1, -1, 0]`, `k = 0`
 - Output: `3`
-- Explanation: `[1, -1]`, `[0]`, and `[1, -1, 0]` depending on indices—count all subarrays summing to `0` (verify: subarrays: [1], [-1], [0], [1,-1], [-1,0], [1,-1,0] sums 1,-1,0,0,-1,0 → three zeros).
+- Explanation: List every contiguous subarray and its sum: `[1] → 1`, `[-1] → -1`, `[0] → 0`, `[1, -1] → 0`, `[-1, 0] → -1`, `[1, -1, 0] → 0`. Exactly **three** of those sums equal `0`: the subarrays `[0]`, `[1, -1]`, and `[1, -1, 0]`.
 
 ## Approach (beginner friendly)
 

@@ -18,6 +18,7 @@ Given an array `nums` of **positive** integers and a positive integer `target`, 
 
 - Input: `nums = [1, 1, 1, 1, 1, 1, 1, 1]`, `target = 11`
 - Output: `0`
+- Explanation: The whole array sums to `8`, which is less than `11`, so no contiguous piece reaches the target.
 
 ## Approach (beginner friendly)
 

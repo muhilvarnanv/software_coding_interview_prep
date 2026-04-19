@@ -21,6 +21,7 @@ Given a string `s`, return `True` if it reads the same forward and backward **af
 
 - Input: `s = "race a car"`
 - Output: `False`
+- Explanation: After keeping only letters and digits you get `raceacar`. The first and last letters match (`r`), but in the middle you eventually compare `e` (from `race`) with `a` (from `car`), so it is not a palindrome.
 
 ## Approach (beginner friendly)
 
@@ -34,17 +35,16 @@ This is the classic **opposite ends** two-pointer pattern without sorting—just
 
 ```python
 def is_palindrome(s: str) -> bool:
-    def alnum(ch: str) -> bool:
-        return ("a" <= ch <= "z") or ("A" <= ch <= "Z") or ("0" <= ch <= "9")
-
     left, right = 0, len(s) - 1
 
     while left < right:
-        while left < right and not alnum(s[left]):
+        # skip non-alphanumeric
+        while left < right and not s[left].isalnum():
             left += 1
-        while left < right and not alnum(s[right]):
+        while left < right and not s[right].isalnum():
             right -= 1
 
+        # compare (case insensitive)
         if s[left].lower() != s[right].lower():
             return False
 

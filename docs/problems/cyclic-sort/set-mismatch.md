@@ -13,10 +13,12 @@ Return `[duplicate, missing]` in that order.
 **Example 1**
 
 - `nums = [1, 2, 2, 4]` → `[2, 3]`
+- Explanation: For length `4` you want `{1,2,3,4}`. `2` appears twice, and `3` never appears, so return `[duplicate, missing] = [2, 3]`.
 
 **Example 2**
 
 - `nums = [1, 1]` → `[1, 2]`
+- Explanation: You should have `{1, 2}` but you have two copies of `1`, so duplicate is `1` and missing is `2`.
 
 ## Approach (beginner friendly)
 

@@ -14,19 +14,17 @@ You must run in **linear time** and without using division (the usual interview 
 
 - Input: `nums = [1, 2, 3, 4]`
 - Output: `[24, 12, 8, 6]`
+- Explanation: For index `0`, multiply `2 × 3 × 4 = 24`. For index `1`, multiply `1 × 3 × 4 = 12`, and so on—each slot is “all except me.”
 
 **Example 2**
 
 - Input: `nums = [-1, 1, 0, -3, 3]`
 - Output: `[0, 0, 9, 0, 0]`
+- Explanation: Any subarray product that uses the `0` wipes out to `0`, except at the index of `0` itself: there you multiply the nonzero neighbors `(-1) × 1 × (-3) × 3` without the middle `0`, which gives `9`.
 
 ## Approach (beginner friendly)
 
-Think of each `answer[i]` as:
-
-\[
-(\text{product of everything left of } i) \times (\text{product of everything right of } i)
-\]
+Think of each `answer[i]` as: **(product of all elements to the left of `i`) × (product of all elements to the right of `i`)**.
 
 First pass: build **prefix products** left to right. Second pass: multiply by **suffix products** right to left. You can do this with one output array: store prefix products first, then update with suffix on the fly.
 
